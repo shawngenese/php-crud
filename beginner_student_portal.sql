@@ -1,6 +1,6 @@
 
-CREATE DATABASE IF NOT EXISTS ali_2b;
-USE ali_2b;
+CREATE DATABASE IF NOT EXISTS fname_section;
+USE fname_section;
 
 DROP TABLE IF EXISTS enrollments;
 DROP TABLE IF EXISTS subjects;
