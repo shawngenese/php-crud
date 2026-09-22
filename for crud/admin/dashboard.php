@@ -1,17 +1,3 @@
-<?php
-    session_start();
-    include "../config/database.php";
-    //only admin can access this page
-    if(!isset($_SESSION["role"]) || $_SESSION ["role"] != "admin" ){
-        header("Location:../index.php");
-        exit;
-    }
-    $students = mysqli_query($conn, "SELECT id FROM users WHERE role='student'");
-    $subjects = mysqli_query($conn, "SELECT id FROM subjects");
-    $enrollments = mysqli_query($conn, "SELECT id FROM enrollments");
-
-?>
-
 <!doctype html>
 <html lang="en">
 
@@ -64,7 +50,7 @@
         <h2>Admin Dashboard</h2>
 
         <p class="text-muted">
-            Welcome, <?php  echo htmlspecialchars($_SESSION["full_name"]);?>.
+            Welcome, System Administrator.
         </p>
 
         <div class="row g-3">
@@ -76,10 +62,10 @@
 
                         <h6>Student Accounts</h6>
 
-                        <h2><?php echo mysqli_num_rows($students);?></h2>
+                        <h2>10</h2>
 
                         <a
-                            href="students/index.php"
+                            href="students.html"
                             class="btn btn-primary btn-sm"
                         >
                             Manage Students
@@ -96,10 +82,10 @@
 
                         <h6>Subjects</h6>
 
-                        <h2><?php echo mysqli_num_rows($subjects);?></h2>
+                        <h2>8</h2>
 
                         <a
-                            href="subjects/index.php"
+                            href="subjects.html"
                             class="btn btn-primary btn-sm"
                         >
                             Manage Subjects
@@ -116,7 +102,7 @@
 
                         <h6>Enrollments</h6>
 
-                        <h2><?php echo mysqli_num_rows($enrollments);?></h2>
+                        <h2>24</h2>
 
                         <span class="text-muted small">
                             Managed from Student Records

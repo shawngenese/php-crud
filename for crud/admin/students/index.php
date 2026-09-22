@@ -1,16 +1,3 @@
-<?php 
-    session_start();
-    include "../../config/database.php";
-    //only admin can access this page
-    if(!isset($_SESSION["role"]) || $_SESSION ["role"] != "admin" ){
-        header("Location:../../index.php");
-        exit;
-    }
-    //GET ALL STUDENT RECORDS
-    $sql = "SELECT * FROM users WHERE role = 'student' ORDER BY id DESC";
-    $result =  mysqli_query($conn, $sql);
-    
-?>
 <!doctype html>
 <html lang="en">
 
@@ -55,23 +42,21 @@
 
     <!-- Main Content -->
     <div class="container py-4">
-        <?php if(isset($_GET["message"])){?>
-            <div class="alert alert-sucess"><?php echo $_GET ["message"]; ?> </div>
-        <?php } ?>
+
         <!-- Header Section -->
         <div class="d-flex justify-content-between mb-3">
 
             <div>
                 <h2>Student Accounts</h2>
 
-                <a href="../dashboard.php">
+                <a href="dashboard.html">
                     ← Dashboard
                 </a>
             </div>
 
             <a
                 class="btn btn-primary"
-                href="create.php"
+                href="student_form.html"
             >
                 + Add Student
             </a>
@@ -96,16 +81,15 @@
                     <tbody>
 
                         <!-- Student Record -->
-                        <?php while($row = mysqli_fetch_assoc($result)){ ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($row['student_no']);?></td>
+                            <td>2026-0001</td>
 
                             <td>
-                                <?php echo htmlspecialchars($row['full_name']);?>
+                                Juan Dela Cruz
                             </td>
 
                             <td>
-                                <?php echo htmlspecialchars($row['username']);?>
+                                juan
                             </td>
 
                             <td>
@@ -130,7 +114,6 @@
                                 </button>
                             </td>
                         </tr>
-                        <?php } ?>
 
                     </tbody>
 

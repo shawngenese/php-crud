@@ -1,16 +1,3 @@
-<?php 
-    session_start();
-    include "../../config/database.php";
-    //only admin can access this page
-    if(!isset($_SESSION["role"]) || $_SESSION ["role"] != "admin" ){
-        header("Location:../../index.php");
-        exit;
-    }
-    //GET ALL STUDENT RECORDS
-    $sql = "SELECT * FROM users WHERE role = 'student' ORDER BY id DESC";
-    $result =  mysqli_query($conn, $sql);
-    
-?>
 <!doctype html>
 <html lang="en">
 
@@ -22,7 +9,7 @@
         content="width=device-width, initial-scale=1"
     >
 
-    <title>Students</title>
+    <title>Subjects</title>
 
     <!-- Bootstrap CSS -->
     <link
@@ -55,70 +42,59 @@
 
     <!-- Main Content -->
     <div class="container py-4">
-        <?php if(isset($_GET["message"])){?>
-            <div class="alert alert-sucess"><?php echo $_GET ["message"]; ?> </div>
-        <?php } ?>
+
         <!-- Header Section -->
         <div class="d-flex justify-content-between mb-3">
 
             <div>
-                <h2>Student Accounts</h2>
+                <h2>Subjects</h2>
 
-                <a href="../dashboard.php">
+                <a href="dashboard.html">
                     ← Dashboard
                 </a>
             </div>
 
             <a
+                href="subject_form.html"
                 class="btn btn-primary"
-                href="create.php"
             >
-                + Add Student
+                + Add Subject
             </a>
 
         </div>
 
-        <!-- Student List Card -->
+        <!-- Subjects List Card -->
         <div class="card">
+
             <div class="card-body">
 
-                <table class="table table-hover">
+                <table class="table">
 
                     <thead>
                         <tr>
-                            <th>Student No.</th>
-                            <th>Name</th>
-                            <th>Username</th>
+                            <th>Code</th>
+                            <th>Subject Name</th>
+                            <th>Units</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
 
                     <tbody>
 
-                        <!-- Student Record -->
-                        <?php while($row = mysqli_fetch_assoc($result)){ ?>
+                        <!-- Subject Record -->
                         <tr>
-                            <td><?php echo htmlspecialchars($row['student_no']);?></td>
+                            <td>IT101</td>
 
                             <td>
-                                <?php echo htmlspecialchars($row['full_name']);?>
+                                Introduction to Computing
                             </td>
 
-                            <td>
-                                <?php echo htmlspecialchars($row['username']);?>
-                            </td>
+                            <td>3</td>
 
                             <td>
                                 <a
-                                    class="btn btn-success btn-sm"
-                                    href="enroll.html"
-                                >
-                                    Enroll Subjects
-                                </a>
-
-                                <a
+                                    href="subject_form.html"
                                     class="btn btn-warning btn-sm"
-                                    href="student_form.html"
                                 >
                                     Edit
                                 </a>
@@ -130,13 +106,13 @@
                                 </button>
                             </td>
                         </tr>
-                        <?php } ?>
 
                     </tbody>
 
                 </table>
 
             </div>
+
         </div>
 
     </div>
