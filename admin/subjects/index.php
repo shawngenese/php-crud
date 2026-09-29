@@ -1,15 +1,18 @@
 <?php 
     session_start();
     include "../../config/database.php";
-    //only admin can access this page
-    if(!isset($_SESSION["role"]) || $_SESSION ["role"] != "admin" ){
-        header("Location:../../index.php");
+
+    if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+        header('Location: ../../index.php');
         exit;
     }
-    //GET ALL STUDENT RECORDS
-    $sql = "SELECT * FROM subjects ORDER BY id ASC";
-    $result =  mysqli_query($conn, $sql);
-    
+
+    $sql = "SELECT * FROM subjects";
+
+    $result = mysqli_query($conn, $sql);
+
+
+
 ?>
 
 <!doctype html>
@@ -46,7 +49,7 @@
 
             <a
                 class="navbar-brand"
-                href="../dashboard.php"
+                href="dashboard.html"
             >
                 Student Portal Admin
             </a>
@@ -56,9 +59,11 @@
 
     <!-- Main Content -->
     <div class="container py-4">
-
+        <?php if (isset($_GET['message'])) {?>
+            <div class="alert alert-success"><?php echo $_GET['message']; ?></div>
+        <?php }?>
         <!-- Header Section -->
-        <div class="d-flex justify-content-between mb-3">
+        <div class="d-flex align-items-center justify-content-between mb-3">
 
             <div>
                 <h2>Subjects</h2>
@@ -94,17 +99,18 @@
                     </thead>
 
                     <tbody>
-
+                         <?php 
+                            while ($row = mysqli_fetch_assoc($result)) {
+                        ?>
                         <!-- Subject Record -->
-                         <?php while($row = mysqli_fetch_assoc($result)){ ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($row['subject_code']);?></td>
+                            <td><?php echo htmlspecialchars($row['subject_code']); ?></td>
 
                             <td>
-                                <?php echo htmlspecialchars($row['subject_name']);?>
+                                <?php echo htmlspecialchars($row['subject_name']); ?>
                             </td>
 
-                            <td><?php echo htmlspecialchars($row['units']);?></td>
+                            <td><?php echo htmlspecialchars($row['units']); ?></td>
 
                             <td>
                                 <a
@@ -120,8 +126,8 @@
                                     Delete
                                 </button>
                             </td>
-                        </tr><?php } ?>
-
+                        </tr>
+                        <?php } ?>
                     </tbody>
 
                 </table>

@@ -3,7 +3,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$db   = "vince_act2e";
+$db   = "2a_genese";
 
 $conn = mysqli_connect($host, $user, $pass, $db);
 
@@ -11,3 +11,4 @@ if (!$conn) {
     die("Database connection failed: " . mysqli_connect_error());
 }
 ?>
+   

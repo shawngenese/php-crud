@@ -1,6 +1,6 @@
 
-CREATE DATABASE IF NOT EXISTS vince_act2e;
-USE vince_act2e;
+CREATE DATABASE IF NOT EXISTS 2a_genese;
+USE 2a_genese;
 
 DROP TABLE IF EXISTS enrollments;
 DROP TABLE IF EXISTS subjects;
